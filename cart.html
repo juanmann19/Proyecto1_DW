@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <title>Carrito de Compras</title>
+</head>
+<body>
+  <header>
+    <div class="logo-container">
+        <img src="./imagenes/logo.png" id="logo-pic" alt="" srcset="">
+        <h1 id="title">Juan<br>Tech</h1>
+    </div>
+    
+    <a class="menu-text" href="http://">
+        <span class="material-symbols-outlined">
+            menu
+        </span>
+        Menu
+    </a>
+    
+
+    <nav id="nav">
+        <ul class="nav-container">
+            <li><a href="./index.html">Inicio</a></li>
+            <li class="submenu">
+                <a href="#">Estadística<span class="material-symbols-outlined">expand_more</span></a>
+                <ul class="children">
+                    <li><a href="#">ejemplo</a></li>
+                    <li><a href="#">ejemplo</a></li>
+                    <li><a href="#">ejemplo</a></li>
+                </ul>
+            </li>  
+            <li><a href="./descuentos.html">Otra</a></li>
+        </ul>
+    </nav>  </header>
+
+  <main>
+    <div class="cart-container">
+      <h2>Carrito de Compras</h2>
+      <div id="display-products" class="products"></div>
+      <p>Total de productos: <span id="item-count">0</span></p>
+      <p>Total: <span id="total-amount">$0.00</span></p>
+    </div>
+  </main>
+
+  <script src="cartscript.js"></script>
+</body>
+</html>

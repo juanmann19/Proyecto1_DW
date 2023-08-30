@@ -10,9 +10,35 @@
   <title>Drag and Drop Shopping</title>
 </head>
 <body>
-  <header>
-    <h1>Mi Tienda Virtual</h1>
-  </header>
+    <header>
+        <div class="logo-container">
+            <img src="./imagenes/logo.png" id="logo-pic" alt="" srcset="">
+            <h1 id="title">Juan<br>Tech</h1>
+        </div>
+        
+        <a class="menu-text" href="http://">
+            <span class="material-symbols-outlined">
+                menu
+            </span>
+            Menu
+        </a>
+        
+
+        <nav id="nav">
+            <ul class="nav-container">
+                <li><a href="./cart.html">cart</a></li>
+                <li class="submenu">
+                    <a href="#">Estadística<span class="material-symbols-outlined">expand_more</span></a>
+                    <ul class="children">
+                        <li><a href="#">ejemplo</a></li>
+                        <li><a href="#">ejemplo</a></li>
+                        <li><a href="#">ejemplo</a></li>
+                    </ul>
+                </li>  
+                <li><a href="./descuentos.html">Otra</a></li>
+            </ul>
+        </nav>
+    </header>
 
   <main>
     <div class="container">
@@ -24,6 +50,7 @@
         <h2>Carrito de Compras</h2>
         <div id="item-count">0</div>
         <div id="total-amount">$0.00</div>
+        <button id="save-cart">Guardar Carrito</button>
       </div>
     </div>
   </main>

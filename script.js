@@ -4,19 +4,19 @@ const itemCountElement = document.getElementById('item-count');
 const totalAmountElement = document.getElementById('total-amount');
 const productsData = [
   {
-    "name": "Pan",
-    "price": 2.5,
-    "image": "images/pan.jpg"
+    "name": "Monitor Asus Gaming G324",
+    "price": 2500,
+    "image": "imagenes/Monitor.jpg"
   },
   {
-    "name": "Leche",
-    "price": 1.8,
-    "image": "images/leche.jpg"
+    "name": "Teclado Gaming HyperX Alloy",
+    "price": 1200,
+    "image": "imagenes/teclado.jpg"
   },
   {
-    "name": "Huevos",
-    "price": 3.0,
-    "image": "images/huevos.jpg"
+    "name": "Marvo Mouse Gaming Inalambrico M728W",
+    "price": 800,
+    "image": "imagenes/mouse.jpg"
   },
   {
     "name": "Frutas",
@@ -34,7 +34,7 @@ productsData.forEach(product => {
   productElement.innerHTML = `
     <img src="${product.image}" alt="${product.name}">
     <h3>${product.name}</h3>
-    <p>Precio: $${product.price.toFixed(2)}</p>
+    <p>Precio: Q${product.price.toFixed(2)}</p>
   `;
   productsContainer.appendChild(productElement);
   
@@ -67,34 +67,41 @@ function dragLeave() {
 }
 
 function drop(e) {
-  e.preventDefault();
-  this.classList.remove('hovered');
-  
-  const draggedItemHTML = e.dataTransfer.getData('text/html');
-  const productName = draggedItemHTML.match(/<h3>(.*?)<\/h3>/)[1];
-  
-  if (!productsInCart.has(productName)) {
-    const productElement = document.createElement('div');
-    productElement.classList.add('product');
-    productElement.innerHTML = draggedItemHTML;
-    const quantityInput = document.createElement('input');
-    quantityInput.type = 'number';
-    quantityInput.className = 'quantity-input';
-    quantityInput.value = 1;
-    quantityInput.min = 1;
-    quantityInput.max = 10;
-    quantityInput.addEventListener('input', updateTotal);
-    productElement.appendChild(quantityInput);
-    this.appendChild(productElement);
+    e.preventDefault();
+    this.classList.remove('hovered');
     
-    productsInCart.set(productName, productElement);
+    const draggedItemHTML = e.dataTransfer.getData('text/html');
+    const productNameMatch = draggedItemHTML.match(/<h3>(.*?)<\/h3>/);
     
-    itemCountElement.textContent = parseInt(itemCountElement.textContent) + 1;
+    if (productNameMatch && productNameMatch.length >= 2) {
+      const productName = productNameMatch[1];
     
-    const price = parseFloat(draggedItemHTML.match(/Precio: \$(\d+\.\d+)/)[1]);
-    totalAmountElement.textContent = `$${(parseFloat(totalAmountElement.textContent.replace('$', '')) + price).toFixed(2)}`;
+      const productElement = document.createElement('div');
+      productElement.classList.add('product');
+      productElement.innerHTML = draggedItemHTML;
+      const quantityInput = document.createElement('input');
+      quantityInput.type = 'number';
+      quantityInput.className = 'quantity-input';
+      quantityInput.value = 1;  // Set quantity to 1 by default
+      quantityInput.min = 1;
+      quantityInput.max = 10;
+      quantityInput.addEventListener('input', updateTotal);
+      productElement.appendChild(quantityInput);
+      this.appendChild(productElement);
+      
+      productsInCart.set(productName, productElement);
+      
+      itemCountElement.textContent = parseInt(itemCountElement.textContent) + 1;
+      
+      const price = parseFloat(draggedItemHTML.match(/Precio: Q(\d+\.\d+)/)[1]);
+      totalAmountElement.textContent = `$${(parseFloat(totalAmountElement.textContent.replace('$', '')) + price).toFixed(2)}`;
+      
+      // Update the total after adding the new product
+      updateTotal();
+    }
   }
-}
+  
+  
 
 function updateTotal() {
   const productsInCartArray = Array.from(productsInCart.values());
@@ -102,7 +109,7 @@ function updateTotal() {
   let totalPrice = 0;
 
   productsInCartArray.forEach(product => {
-    const price = parseFloat(product.querySelector('p').textContent.match(/\$(\d+\.\d+)/)[1]);
+    const price = parseFloat(product.querySelector('p').textContent.match(/Q(\d+\.\d+)/)[1]);
     const quantity = parseInt(product.querySelector('.quantity-input').value);
     totalCount += quantity;
     totalPrice += price * quantity;
@@ -110,4 +117,21 @@ function updateTotal() {
 
   itemCountElement.textContent = totalCount;
   totalAmountElement.textContent = `$${totalPrice.toFixed(2)}`;
-}
+
+
+  const saveCartButton = document.getElementById('save-cart');
+  saveCartButton.addEventListener('click', function() {
+    const productsInCartArray = Array.from(productsInCart.values()).map(productElement => {
+      const product = {
+        image: productElement.querySelector('img').src,
+        name: productElement.querySelector('h3').textContent,
+        price: parseFloat(productElement.querySelector('p').textContent.match(/Q(\d+\.\d+)/)[1]),
+        quantity: parseInt(productElement.querySelector('.quantity-input').value)
+      };
+      return product;
+    });
+    localStorage.setItem('cartProducts', JSON.stringify(productsInCartArray));
+    alert('Carrito guardado en Local Storage.');
+  });  
+  }
+
