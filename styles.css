@@ -186,3 +186,25 @@ header nav ul li .children li {
     text-align: center;
   }
   
+  .totals {
+    margin-top: 20px;
+    text-align: right;
+  }
+  
+  .totals p {
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+  
+  #save-cart {
+    background-color: #FF8820;
+    color: #FFF;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  #save-cart:hover {
+    background-color: #E67700;
+  }

@@ -1,8 +1,21 @@
 const displayProducts = document.getElementById('display-products');
 const itemCountElement = document.getElementById('item-count');
 const totalAmountElement = document.getElementById('total-amount');
-
 const cartProducts = JSON.parse(localStorage.getItem('cartProducts'));
+
+function updateTotals() {
+  const updatedCartProducts = JSON.parse(localStorage.getItem('cartProducts'));
+  let totalCount = 0;
+  let totalPrice = 0;
+
+  updatedCartProducts.forEach(product => {
+    totalCount += product.quantity;
+    totalPrice += product.price * product.quantity;
+  });
+
+  itemCountElement.textContent = totalCount;
+  totalAmountElement.textContent = `$${totalPrice.toFixed(2)}`;
+}
 
 if (cartProducts) {
   cartProducts.forEach(product => {
@@ -13,23 +26,19 @@ if (cartProducts) {
       <h3>${product.name}</h3>
       <p>Precio: Q${product.price.toFixed(2)}</p>
       <p>Cantidad: ${product.quantity}</p>
+      <button class="remove-button">Eliminar</button>
     `;
     displayProducts.appendChild(productElement);
+
+    const removeButton = productElement.querySelector('.remove-button');
+    removeButton.addEventListener('click', () => {
+      const existingProducts = JSON.parse(localStorage.getItem('cartProducts'));
+      const updatedProducts = existingProducts.filter(p => p.name !== product.name);
+      localStorage.setItem('cartProducts', JSON.stringify(updatedProducts));
+      productElement.remove();
+      updateTotals(); // Actualizar totales después de eliminar
+    });
   });
 
-  // Calcula el total de productos y el total de precios
-  let totalCount = 0;
-  let totalPrice = 0;
-
-  cartProducts.forEach(product => {
-    totalCount += product.quantity;
-    totalPrice += product.price * product.quantity;
-  });
-
-  itemCountElement.textContent = totalCount;
-  totalAmountElement.textContent = `Total: Q${totalPrice.toFixed(2)}`;
-} else {
-  displayProducts.innerHTML = '<p>No hay productos en el carrito.</p>';
-  itemCountElement.textContent = '0';
-  totalAmountElement.textContent = 'Total: Q0.00';
+  updateTotals(); // Llamada inicial para mostrar los totales
 }
