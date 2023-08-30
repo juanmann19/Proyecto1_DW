@@ -1,31 +1,33 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lista de Compras</title>
   <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+  <title>Drag and Drop Shopping</title>
 </head>
 <body>
   <header>
-    <h1>Lista de Compras</h1>
+    <h1>Mi Tienda Virtual</h1>
   </header>
-  
+
   <main>
-    <div class="products">
-      <!-- Los productos se cargarán desde JavaScript -->
-    </div>
-    
-    <div class="cart" id="cart">
-      <h2>Carrito de Compras</h2>
-      <p>Artículos: <span id="item-count">0</span></p>
-      <p>Total: <span id="total-amount">$0.00</span></p>
-      <ul id="cart-list" class="cart-list">
-        <!-- Los productos arrastrados se mostrarán aquí -->
-      </ul>
+    <div class="container">
+      <div class="products">
+        <!-- Productos aquí -->
+      </div>
+
+      <div class="cart">
+        <h2>Carrito de Compras</h2>
+        <div id="item-count">0</div>
+        <div id="total-amount">$0.00</div>
+      </div>
     </div>
   </main>
-  
-  <script src="script.js"></script>
+
+  <footer>
+    <p>Derechos de Autor &copy; 2023 Mi Tienda Virtual</p>
+  </footer>
 </body>
 </html>
