@@ -1,0 +1,23 @@
+[
+    {
+      "name": "Pan",
+      "price": 2.5,
+      "image": "images/pan.jpg"
+    },
+    {
+      "name": "Leche",
+      "price": 1.8,
+      "image": "images/leche.jpg"
+    },
+    {
+      "name": "Huevos",
+      "price": 3.0,
+      "image": "images/huevos.jpg"
+    },
+    {
+      "name": "Frutas",
+      "price": 8.5,
+      "image": "images/frutas.jpg"
+    }
+  ]
+  
