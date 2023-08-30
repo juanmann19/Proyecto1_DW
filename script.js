@@ -81,6 +81,8 @@ function drop(e) {
     quantityInput.type = 'number';
     quantityInput.className = 'quantity-input';
     quantityInput.value = 1;
+    quantityInput.min = 1;
+    quantityInput.max = 10;
     quantityInput.addEventListener('input', updateTotal);
     productElement.appendChild(quantityInput);
     this.appendChild(productElement);
