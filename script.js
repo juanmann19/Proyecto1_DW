@@ -2,6 +2,8 @@ const productsContainer = document.querySelector('.products');
 const cart = document.querySelector('.cart');
 const itemCountElement = document.getElementById('item-count');
 const totalAmountElement = document.getElementById('total-amount');
+const locationElement = document.getElementById('location'); 
+
 const productsData = [
   {
     "name": "Monitor Asus Gaming G324",
@@ -19,9 +21,9 @@ const productsData = [
     "image": "imagenes/mouse.jpg"
   },
   {
-    "name": "Frutas",
-    "price": 8.5,
-    "image": "images/frutas.jpg"
+    "name": "Case Gamer Tikal J3 Con RGB",
+    "price": 900,
+    "image": "imagenes/case.png"
   }
 ];
 
@@ -134,4 +136,22 @@ function updateTotal() {
     alert('Carrito guardado en Local Storage.');
   });  
   }
-
+  function getLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        position => {
+          const latitude = position.coords.latitude;
+          const longitude = position.coords.longitude;
+          locationElement.textContent = `Ubicación: Latitud ${latitude}, Longitud ${longitude}`;
+        },
+        error => {
+          locationElement.textContent = 'No se pudo obtener la ubicación';
+        }
+      );
+    } else {
+      locationElement.textContent = 'La geolocalización no está disponible en este navegador';
+    }
+  }
+  
+  // Llamamos a la función para obtener la ubicación
+  getLocation();

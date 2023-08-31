@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="styles.css">
-  <title>Carrito de Compras</title>
+  <title>Mi Información Personal</title>
 </head>
 <body>
     <header>
@@ -30,21 +30,19 @@
         </nav>
     </header>
 
-  <main>
-    <div class="cart-container">
-      <h2>Carrito de Compras</h2>
-      <div id="display-products" class="products"></div>
-      <div id="totals">
-          <p>Total de productos: <span id="item-count">0</span></p>
-          <p>Total: <span id="total-amount">$0.00</span></p>
-        </div>
+  <main class="landing">
+    <div class="personal-info">
+      <h2 id="mydata">Juan Manuel Garcia Morales - 0900-19-22633 - Seccion B</h2>
+      <h2>En esta pagina vera nuestros productos. Para comprar clickee el menu hacer compra y revise su carrito en la siguiente opcion</h4>
+      <h4></h4>
+    </div>
+    
+    <p><h2>Productos Disponibles</h2></p>
+    <div class="products">
+      <div id="product-list" class="product-list"></div>
     </div>
   </main>
-  <footer>
-    <p>Estas accediendo desde: </p>
-      <p id="location">Ubicación: Obteniendo...</p>
-    <p>Juan Manuel Garcia &copy; Proyecto 1</p>
-  </footer>
-  <script src="cartscript.js"></script>
+  
+  <script src="inicioscript.js"></script>
 </body>
 </html>
